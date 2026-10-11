@@ -24,7 +24,7 @@ PIIGuard addresses this challenge through a privacy-preserving preprocessing arc
 - **Consistent Pseudonymization:** Uses Faker (`en_IN` locale) with canonical entity normalization so identical entities across a document receive identical synthetic surrogates.
 - **Right-to-Left Span Replacement:** Replaces entity spans in reverse character order to prevent index drift and text distortion.
 - **Encrypted Offline Vault:** Secures mapping tables using Fernet authenticated symmetric encryption (AES-128-CBC + HMAC-SHA256) stored in `.enc` files with separate key storage.
-- **Zero Terminal Leakage by Default:** Console outputs display aggregate metrics and safe pseudonymized text only; raw inputs and plaintext mapping keys are withheld from stdout.
+- Sensitive Input and Mapping Keys Withheld from Normal Console Output: Normal CLI output omits raw inputs and plaintext mapping keys for detected structured identifiers. Regex-based detection may miss unstructured personal information.
 - **Contextual Extraction Interface:** Modular multi-stage pipeline designed to interface with local quantized LLMs for semantic entity recognition.
 
 ---
@@ -99,7 +99,7 @@ PIIGuard/
 Clone the repository and synchronize dependencies using `uv`:
 
 ```bash
-git clone https://github.com/<owner>/PIIGuard.git
+git clone https://github.com/anya2203/PIIGuard.git
 cd PIIGuard
 uv sync
 ```
@@ -135,7 +135,7 @@ Input:
 Contact jordan.lee@example.org or +91 98765 43210 regarding PAN ABCDE1234F.
 
 Pseudonymized Output:
-Contact person@example.org or 98104-33218 regarding PAN VXRPS6001G.
+Contact person@example.org or [SYNTHETIC_PHONE] regarding PAN [SYNTHETIC_PAN].
 ```
 
 ---
@@ -149,7 +149,7 @@ uv run pytest -v
 ```
 
 **Verified Test Results:**
-- 34 passed in 1.04s.
+- Last verified test run: 34 tests passed.
 - Covers regex extraction, octet boundary validation, exact span offsets, right-to-left replacement, repeated entity mapping consistency, vault encryption/decryption round trips, atomic exclusive-creation race condition prevention (no-clobber), tamper detection, terminal output privacy across stdout/stderr with multiple synthetic canaries, and offline socket isolation.
 
 ---
@@ -166,9 +166,10 @@ uv run pytest -v
 
 ---
 
-## Authors & Attribution
+## Authors
 
-Developed and maintained by **PIIGuard Contributors**.
+**Ananya Manoharan**
+**Anuj Srinivas**
 
 ---
 
