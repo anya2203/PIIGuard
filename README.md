@@ -168,9 +168,8 @@ uv run pytest -v
 
 ## Authors
 
--**Ananya Manoharan**
--**Anuj Srinivas**
-
+- **Ananya Manoharan**
+- **Anuj Srinivas**
 ---
 
 ## Future Improvements
